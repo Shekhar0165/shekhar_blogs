@@ -32,75 +32,155 @@ export default function ContactPage() {
     };
 
     return (
-        <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-2">Contact</h1>
-            <p className="text-muted-foreground mb-8">
-                Have a question or want to work together? Send me a message!
-            </p>
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            {/* Tech Background Decor */}
+            <div className="fixed inset-0 bg-grid opacity-[0.03] -z-10 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                <Mail size={16} className="text-[var(--indigo)]" />
-                <a href="mailto:shekharkashyap913@gmail.com" className="hover:text-[var(--indigo)] transition-colors">shekharkashyap913@gmail.com</a>
-            </div>
-            <div className="flex gap-2 mb-10">
-                {[
-                    { href: 'https://github.com/shekhar0165', icon: Github, label: 'GitHub' },
-                    { href: 'https://linkedin.com/in/shekhar0165', icon: Linkedin, label: 'LinkedIn' },
-                    { href: 'https://twitter.com/shekhar00165', icon: Twitter, label: 'Twitter' },
-                ].map((s) => (
-                    <Button key={s.label} variant="ghost" size="icon" asChild className="rounded-lg">
-                        <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                            <s.icon size={18} />
-                        </a>
-                    </Button>
-                ))}
+            <div className="max-w-2xl mb-16">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--indigo)]/10 text-[var(--indigo)] text-[10px] font-bold uppercase tracking-widest mb-6 border border-[var(--indigo)]/20">
+                    Get in touch
+                </div>
+                <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter">Let&apos;s Build Something <span className="bg-gradient-to-r from-[var(--indigo)] to-cyan-500 bg-clip-text text-transparent">Great.</span></h1>
+                <p className="text-lg text-muted-foreground font-medium leading-relaxed">
+                    Have a project in mind or just want to say hi? I&apos;m always open to discussing new opportunities,
+                    backend architectures, or DevOps workflows.
+                </p>
             </div>
 
-            {status === 'success' ? (
-                <Card className="border-green-500/30 bg-green-500/5">
-                    <CardContent className="p-8 text-center">
-                        <p className="text-green-600 dark:text-green-400 font-semibold text-lg mb-1">✅ Message sent!</p>
-                        <p className="text-sm text-muted-foreground">I&apos;ll get back to you as soon as possible.</p>
-                    </CardContent>
-                </Card>
-            ) : (
-                <Card>
-                    <CardContent className="p-6">
-                        <form onSubmit={handleSubmit} className="space-y-5">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-xs font-medium text-muted-foreground mb-1.5">Name *</label>
-                                    <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className="h-11" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                {/* Contact Form */}
+                <div className="lg:col-span-7">
+                    <div className="p-8 rounded-3xl bg-secondary/30 border border-border/50 shadow-2xl shadow-indigo-500/5 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--indigo)]/5 rounded-full blur-3xl -mr-16 -mt-16" />
+
+                        <form onSubmit={handleSubmit} className="space-y-6 relative">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label htmlFor="name" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Your Name</label>
+                                    <Input
+                                        id="name"
+                                        name="name"
+                                        placeholder="John Doe"
+                                        required
+                                        value={form.name}
+                                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                                        className="h-12 rounded-xl bg-white border-muted focus-visible:ring-[var(--indigo)]"
+                                    />
                                 </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-muted-foreground mb-1.5">Email *</label>
-                                    <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="john@example.com" className="h-11" />
+                                <div className="space-y-2">
+                                    <label htmlFor="email" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Email Address</label>
+                                    <Input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="john@example.com"
+                                        required
+                                        value={form.email}
+                                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                                        className="h-12 rounded-xl bg-white border-muted focus-visible:ring-[var(--indigo)]"
+                                    />
                                 </div>
                             </div>
-                            <div>
-                                <label className="block text-xs font-medium text-muted-foreground mb-1.5">Subject *</label>
-                                <Input required value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} placeholder="Let's work together" className="h-11" />
+                            <div className="space-y-2">
+                                <label htmlFor="subject" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Subject</label>
+                                <Input
+                                    id="subject"
+                                    name="subject"
+                                    placeholder="Project Inquiry"
+                                    required
+                                    value={form.subject}
+                                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                                    className="h-12 rounded-xl bg-white border-muted focus-visible:ring-[var(--indigo)]"
+                                />
                             </div>
-                            <div>
-                                <label className="block text-xs font-medium text-muted-foreground mb-1.5">Message *</label>
-                                <Textarea required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Hey Shekhar..." className="min-h-[120px]" />
+                            <div className="space-y-2">
+                                <label htmlFor="message" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Message</label>
+                                <Textarea
+                                    id="message"
+                                    name="message"
+                                    placeholder="Tell me about your project..."
+                                    required
+                                    rows={5}
+                                    value={form.message}
+                                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                                    className="rounded-xl bg-white border-muted focus-visible:ring-[var(--indigo)] resize-none min-h-[150px]"
+                                />
                             </div>
-                            {status === 'error' && (
-                                <p className="text-red-500 text-sm">Something went wrong. Please try again.</p>
-                            )}
                             <Button
                                 type="submit"
-                                disabled={status === 'sending'}
                                 size="lg"
-                                className="bg-[var(--indigo)] hover:bg-[var(--indigo)]/90 text-white shadow-md shadow-[var(--indigo)]/20 h-12 px-8"
+                                className="w-full bg-[var(--indigo)] hover:bg-[var(--indigo)]/90 text-white font-black h-14 rounded-xl shadow-xl shadow-[var(--indigo)]/20 transition-all active:scale-[0.98]"
+                                disabled={status === 'sending'}
                             >
-                                <Send size={16} className="mr-2" />
-                                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                                {status === 'sending' ? (
+                                    <>
+                                        <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                                        Transmitting...
+                                    </>
+                                ) : (
+                                    <>
+                                        Send Message <Send size={18} className="ml-2" />
+                                    </>
+                                )}
                             </Button>
+
+                            {status === 'success' && (
+                                <div className="p-4 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2">
+                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    Message transmitted successfully!
+                                </div>
+                            )}
+
+                            {status === 'error' && (
+                                <div className="p-4 rounded-xl bg-red-50 text-red-700 text-sm font-bold animate-in fade-in slide-in-from-bottom-2">
+                                    Transmission failed. Please try again.
+                                </div>
+                            )}
                         </form>
-                    </CardContent>
-                </Card>
-            )}
+                    </div>
+                </div>
+
+                {/* Info */}
+                <div className="lg:col-span-5 space-y-8">
+                    <div className="p-8 rounded-3xl bg-[var(--indigo)] text-white shadow-2xl shadow-indigo-500/20 relative overflow-hidden group">
+                        <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mb-24 -mr-24" />
+                        <h2 className="text-xl font-black mb-6 uppercase tracking-widest opacity-80">Direct Line</h2>
+                        <div className="space-y-6 relative">
+                            <a href="mailto:shekharkashyap913@gmail.com" className="flex items-center gap-4 group/item">
+                                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover/item:bg-white/20 transition-colors">
+                                    <Mail size={20} />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Email</p>
+                                    <p className="font-bold text-lg">shekharkashyap913@gmail.com</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div className="p-8 rounded-3xl bg-muted/30 border border-border backdrop-blur-sm">
+                        <h2 className="text-xl font-black mb-6 uppercase tracking-widest text-muted-foreground/50">Follow Transmission</h2>
+                        <div className="grid grid-cols-2 gap-4">
+                            {[
+                                { href: 'https://github.com/shekhar0165', icon: Github, label: 'GitHub' },
+                                { href: 'https://linkedin.com/in/shekhar0165', icon: Linkedin, label: 'LinkedIn' },
+                                { href: 'https://twitter.com/shekhar00165', icon: Twitter, label: 'Twitter' },
+                            ].map((s) => (
+                                <a
+                                    key={s.label}
+                                    href={s.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-border/50 hover:border-[var(--indigo)] hover:shadow-lg transition-all group"
+                                >
+                                    <s.icon size={18} className="text-muted-foreground group-hover:text-[var(--indigo)] transition-colors" />
+                                    <span className="text-xs font-bold uppercase tracking-widest">{s.label}</span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 }

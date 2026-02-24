@@ -54,26 +54,33 @@ export default function BlogListClient({ posts }: { posts: BlogPost[] }) {
     return (
         <div>
             {/* Search */}
-            <div className="relative mb-6">
-                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                    type="text"
-                    placeholder="Search articles..."
-                    value={search}
-                    onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                    className="pl-11 h-12"
-                />
+            <div className="relative mb-10 group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[var(--indigo)] to-cyan-500 rounded-2xl blur opacity-20 group-focus-within:opacity-40 transition duration-500" />
+                <div className="relative">
+                    <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-[var(--indigo)] transition-colors" />
+                    <Input
+                        type="text"
+                        placeholder="Search articles, topics, or keywords..."
+                        value={search}
+                        onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+                        className="pl-12 h-14 bg-white/70 backdrop-blur-md border-border rounded-xl focus-visible:ring-[var(--indigo)] focus-visible:ring-offset-0 text-base font-medium transition-all"
+                    />
+                </div>
             </div>
 
             {/* Tag filters — dynamic from API */}
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex flex-wrap items-center gap-3 mb-12">
+                <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground mr-2">Filter By:</span>
                 {tagNames.map((tag) => (
                     <Button
                         key={tag}
-                        variant={activeTag === tag ? 'default' : 'secondary'}
+                        variant={activeTag === tag ? 'default' : 'outline'}
                         size="sm"
                         onClick={() => { setActiveTag(tag); setPage(1); }}
-                        className={activeTag === tag ? 'bg-[var(--indigo)] hover:bg-[var(--indigo)]/90 text-white' : ''}
+                        className={`rounded-xl px-5 h-9 font-bold text-xs uppercase tracking-wider transition-all duration-300 ${activeTag === tag
+                                ? 'bg-[var(--indigo)] hover:bg-[var(--indigo)]/90 text-white shadow-lg shadow-[var(--indigo)]/20'
+                                : 'bg-white/50 hover:bg-white border-border hover:border-[var(--indigo)]/50'
+                            }`}
                     >
                         {tag}
                     </Button>

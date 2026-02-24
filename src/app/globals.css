@@ -46,42 +46,6 @@
   --indigo-light: #818cf8;
 }
 
-/* ── Dark Theme (warm navy-slate, softer contrast) ── */
-.dark {
-  --background: #0c1222;
-  --foreground: #e8edf5;
-  --muted: #162033;
-  --muted-foreground: #8896b0;
-  --border: #1e2d45;
-  --input: #1e2d45;
-  --ring: #a5b4fc;
-  --card: #131c31;
-  --card-foreground: #e8edf5;
-  --popover: #131c31;
-  --popover-foreground: #e8edf5;
-  --primary: #a5b4fc;
-  --primary-foreground: #0c1222;
-  --secondary: #162033;
-  --secondary-foreground: #e8edf5;
-  --accent: #162033;
-  --accent-foreground: #e8edf5;
-  --destructive: #f87171;
-  --chart-1: #a5b4fc;
-  --chart-2: #67e8f9;
-  --chart-3: #fcd34d;
-  --chart-4: #6ee7b7;
-  --chart-5: #fda4af;
-  --sidebar: #131c31;
-  --sidebar-foreground: #e8edf5;
-  --sidebar-primary: #a5b4fc;
-  --sidebar-primary-foreground: #0c1222;
-  --sidebar-accent: #162033;
-  --sidebar-accent-foreground: #e8edf5;
-  --sidebar-border: #1e2d45;
-  --sidebar-ring: #a5b4fc;
-  --indigo: #a5b4fc;
-  --indigo-light: #c7d2fe;
-}
 
 /* ── Base ── */
 html {
@@ -257,5 +221,64 @@ pre:hover .copy-btn {
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl border-b border-white/5;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  .bg-grid {
+    background-size: 30px 30px;
+    background-image: linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    background-position: center center;
+  }
+
+  .bg-dot {
+    background-size: 20px 20px;
+    background-image: radial-gradient(circle, rgba(99, 102, 241, 0.07) 1px, transparent 1px);
   }
 }
