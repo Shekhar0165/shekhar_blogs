@@ -1,26 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Light Theme (clean, airy, professional) ── */
 :root {
+  --radius: 0.625rem;
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #6366f1;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --chart-1: #6366f1;
+  --chart-2: #06b6d4;
+  --chart-3: #f59e0b;
+  --chart-4: #10b981;
+  --chart-5: #f43f5e;
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #6366f1;
+  /* Custom accent for non-shadcn usage */
+  --indigo: #6366f1;
+  --indigo-light: #818cf8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Dark Theme (warm navy-slate, softer contrast) ── */
+.dark {
+  --background: #0c1222;
+  --foreground: #e8edf5;
+  --muted: #162033;
+  --muted-foreground: #8896b0;
+  --border: #1e2d45;
+  --input: #1e2d45;
+  --ring: #a5b4fc;
+  --card: #131c31;
+  --card-foreground: #e8edf5;
+  --popover: #131c31;
+  --popover-foreground: #e8edf5;
+  --primary: #a5b4fc;
+  --primary-foreground: #0c1222;
+  --secondary: #162033;
+  --secondary-foreground: #e8edf5;
+  --accent: #162033;
+  --accent-foreground: #e8edf5;
+  --destructive: #f87171;
+  --chart-1: #a5b4fc;
+  --chart-2: #67e8f9;
+  --chart-3: #fcd34d;
+  --chart-4: #6ee7b7;
+  --chart-5: #fda4af;
+  --sidebar: #131c31;
+  --sidebar-foreground: #e8edf5;
+  --sidebar-primary: #a5b4fc;
+  --sidebar-primary-foreground: #0c1222;
+  --sidebar-accent: #162033;
+  --sidebar-accent-foreground: #e8edf5;
+  --sidebar-border: #1e2d45;
+  --sidebar-ring: #a5b4fc;
+  --indigo: #a5b4fc;
+  --indigo-light: #c7d2fe;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--indigo);
+  color: white;
+}
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--indigo), var(--indigo-light));
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* ── Prose / Typography ── */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--indigo);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--indigo);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-pre-code: #e4e4e7;
+  --tw-prose-pre-bg: #1e1e2e;
+}
+
+.prose a {
+  text-decoration-color: var(--indigo);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: var(--indigo-light);
+}
+
+.prose pre {
+  background: #1e1e2e !important;
+  border: 1px solid #313244;
+  border-radius: 12px;
+  position: relative;
+  overflow-x: auto;
+}
+
+.prose code {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 0.85em;
+}
+
+.prose :not(pre)>code {
+  background: var(--muted);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  border: 1px solid var(--border);
+}
+
+.prose img {
+  border-radius: 12px;
+}
+
+.prose blockquote {
+  border-left-color: var(--indigo);
+}
+
+/* ── Back to top button ── */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* ── Copy button on code blocks ── */
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #313244;
+  border: 1px solid #45475a;
+  color: #a6adc8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+pre:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  color: white;
+  border-color: var(--indigo);
+  background: var(--indigo);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
